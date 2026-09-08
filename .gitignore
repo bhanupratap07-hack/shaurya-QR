@@ -3,3 +3,6 @@
 backend/participants - Sheet1.csv
 backend/shaurya-qr-codes/MASTER_QR_LIST.csv
 backend/qr_codes_db_import.json
+
+.env
+.env.local
