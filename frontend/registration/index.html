@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shaurya IIT KGP — Register</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       CSS RESET & VARIABLES
+       ============================================================ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* Light Theme Colors */
+      --text-main: #1f2937;
+      --text-muted: #d1d5db; /* Light gray for placeholders like in image */
+      --border-color: #f3f4f6;
+      --input-bg: #fcfcfc;
+      
+      /* Button Gradient */
+      --btn-grad-start: #f97316; /* Orange */
+      --btn-grad-end: #d946ef;   /* Pink/Purple */
+      
+      /* Status */
+      --success: #22c55e;
+      --error: #ef4444;
+    }
+
+    /* ============================================================
+       BODY & BACKGROUND (Light Radial Gradient)
+       ============================================================ */
+    html {
+      min-height: 100%;
+      width: 100%;
+      background: #fafafa;
+    }
+    
+    body {
+      min-height: 100vh;
+      width: 100%;
+      margin: 0;
+      padding: 20px;
+      font-family: 'Inter', sans-serif;
+      /* Soft radial glow in the center matching the reference */
+      background: radial-gradient(circle at center, #fff4ed 0%, #fef2f2 30%, #fafafa 80%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ============================================================
+       CONTAINER (No Card Background)
+       ============================================================ */
+    .register-container {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* ============================================================
+       LOGO & HEADER
+       ============================================================ */
+    .logo-wrapper {
+      width: 72px;
+      height: 72px;
+      background: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      box-shadow: 0 4px 15px rgba(249, 115, 22, 0.1);
+      position: relative;
+    }
+    
+    /* Subtle orange glow behind the white circle */
+    .logo-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: -10px;
+      background: radial-gradient(circle, rgba(249,115,22,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: -1;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+    }
+
+    .brand-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .brand-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.3;
+      letter-spacing: 0.5px;
+      margin-bottom: 32px;
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
+       FORM STYLES
+       ============================================================ */
+    form {
+      width: 100%;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 18px;
+      width: 16px;
+      height: 16px;
+      color: #e5e7eb; /* Very light gray for icons */
+      pointer-events: none;
+      transition: color 0.2s;
+    }
+
+    .form-input {
+      width: 100%;
+      height: 52px;
+      padding: 0 16px 0 48px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--text-main);
+      background: var(--input-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px; /* Pill-like rounded corners */
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .form-input::placeholder {
+      color: #d1d5db;
+      font-weight: 400;
+    }
+
+    .form-input:focus {
+      background: #ffffff;
+      border-color: #f97316;
+      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.05);
+    }
+
+    .form-input:focus + .input-icon,
+    .form-input:focus ~ .input-icon {
+      color: #f97316;
+    }
+
+    .phone-prefix {
+      position: absolute;
+      left: 48px;
+      font-size: 14px;
+      color: #d1d5db;
+      pointer-events: none;
+    }
+
+    .phone-input {
+      padding-left: 80px !important;
+    }
+
+    .error-text {
+      display: none;
+      color: var(--error);
+      font-size: 11px;
+      text-align: left;
+      margin-top: 4px;
+      padding-left: 8px;
+    }
+    
+    .form-group.error .form-input {
+      border-color: var(--error);
+    }
+    .form-group.error .error-text {
+      display: block;
+    }
+
+    /* ============================================================
+       BUTTON
+       ============================================================ */
+    .btn-submit {
+      width: 100%;
+      height: 52px;
+      margin-top: 8px;
+      background: linear-gradient(to right, var(--btn-grad-start), var(--btn-grad-end));
+      color: white;
+      border: none;
+      border-radius: 26px; /* Pill-shaped button */
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 8px 20px rgba(249, 115, 22, 0.2);
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(249, 115, 22, 0.3);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Help Text (like the reference) */
+    .help-text {
+      margin-top: 24px;
+      font-size: 12px;
+      color: #d1d5db;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* ============================================================
+       SUCCESS ANIMATION (Green Tick)
+       ============================================================ */
+    .success-container {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 0;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .success-circle {
+      width: 80px;
+      height: 80px;
+      background-color: var(--success);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 25px rgba(34, 197, 94, 0.2);
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0); }
+      80% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .tick-icon {
+      color: white;
+      width: 40px;
+      height: 40px;
+      stroke-dasharray: 50;
+      stroke-dashoffset: 50;
+      animation: drawTick 0.4s ease 0.3s forwards;
+    }
+
+    @keyframes drawTick {
+      to { stroke-dashoffset: 0; }
+    }
+
+    .success-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .success-msg {
+      font-size: 14px;
+      color: #9ca3af;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="register-container">
+    <div id="formSection" style="width: 100%;">
+      <div class="logo-wrapper">
+        <div class="brand-logo">
+          <img src="shaurya-logo.png" alt="Shaurya Logo" />
+        </div>
+      </div>
+      <h1 class="brand-title">SHAURYA 2026<br>REGISTRATION</h1>
+
+      <form id="regForm" novalidate>
+        
+        <!-- Name -->
+        <div class="form-group" id="nameGroup">
+          <div class="input-wrapper">
+            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <input type="text" class="form-input" id="nameInput" placeholder="Full Name" required>
+          </div>
+          <div class="error-text">Please enter a valid name</div>
+        </div>
+
+        <!-- College -->
+        <div class="form-group" id="collegeGroup">
+          <div class="input-wrapper">
+            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+            <input type="text" class="form-input" id="collegeInput" placeholder="College Name" required>
+          </div>
+          <div class="error-text">Please enter your college name</div>
+        </div>
+
+        <!-- Mobile -->
+        <div class="form-group" id="mobileGroup">
+          <div class="input-wrapper">
+            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+              <line x1="12" y1="18" x2="12.01" y2="18"></line>
+            </svg>
+            <span class="phone-prefix">+91 |</span>
+            <input type="tel" class="form-input phone-input" id="mobileInput" placeholder="98765 43210" maxlength="10" required>
+          </div>
+          <div class="error-text">Please enter a valid 10-digit number</div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group" id="emailGroup">
+          <div class="input-wrapper">
+            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <input type="email" class="form-input" id="emailInput" placeholder="Email Address" required>
+          </div>
+          <div class="error-text">Please enter a valid email</div>
+        </div>
+
+        <button type="submit" class="btn-submit" id="submitBtn">Register Now</button>
+      </form>
+
+      <div class="help-text">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        Need help? Contact Admin
+      </div>
+    </div>
+
+    <!-- Success Section -->
+    <div id="successSection" class="success-container">
+      <div class="success-circle">
+        <svg class="tick-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <h2 class="success-title">Registration Successful!</h2>
+      <p class="success-msg">
+        Thanks for registering. Please visit the Shaurya counter with your College ID to collect your QR pass.
+      </p>
+    </div>
+
+  </div>
+
+  <script>
+    const form = document.getElementById('regForm');
+    const formSection = document.getElementById('formSection');
+    const successSection = document.getElementById('successSection');
+    const btn = document.getElementById('submitBtn');
+
+    function validateEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+    
+    function validatePhone(phone) {
+      return /^[6-9]\d{9}$/.test(phone);
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      let isValid = true;
+
+      // Validate Name
+      const name = document.getElementById('nameInput');
+      if (name.value.trim().length < 3) {
+        document.getElementById('nameGroup').classList.add('error');
+        isValid = false;
+      } else {
+        document.getElementById('nameGroup').classList.remove('error');
+      }
+
+      // Validate College
+      const college = document.getElementById('collegeInput');
+      if (college.value.trim().length < 2) {
+        document.getElementById('collegeGroup').classList.add('error');
+        isValid = false;
+      } else {
+        document.getElementById('collegeGroup').classList.remove('error');
+      }
+
+      // Validate Mobile
+      const mobile = document.getElementById('mobileInput');
+      if (!validatePhone(mobile.value.trim())) {
+        document.getElementById('mobileGroup').classList.add('error');
+        isValid = false;
+      } else {
+        document.getElementById('mobileGroup').classList.remove('error');
+      }
+
+      // Validate Email
+      const email = document.getElementById('emailInput');
+      if (!validateEmail(email.value.trim())) {
+        document.getElementById('emailGroup').classList.add('error');
+        isValid = false;
+      } else {
+        document.getElementById('emailGroup').classList.remove('error');
+      }
+
+      if (isValid) {
+        btn.textContent = 'Processing...';
+        btn.disabled = true;
+        
+        // Simulate API delay
+        setTimeout(() => {
+          formSection.style.display = 'none';
+          successSection.style.display = 'flex';
+        }, 1200);
+      }
+    });
+
+    // Mobile input formatting
+    document.getElementById('mobileInput').addEventListener('input', function(e) {
+      this.value = this.value.replace(/[^0-9]/g, '');
+    });
+  </script>
+</body>
+</html>
